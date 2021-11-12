@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 PT. Simetri Sinergi Indonesia
+     Copyright 2021 OpenSynergy Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<openerp>
+<data>
+<record id="stock_fulfillment_service_djbc_view_form" model="ir.ui.view">
+    <field name="name">stock.fulfillment_service.djbc.form</field>
+    <field name="model">stock.fulfillment_service</field>
+    <field name="arch" type="xml">
+        <form>
+            <header />
+            <group name="header" colspan="4" col="1">
+                <group name="header_1" colspan="1" col="2">
+                    <field name="name" />
+                    <field name="quant_id" />
+                    <field name="move_id" />
+                    <field name="picking_id" />
+                    <field name="partner_id" />
+                    <field name="item_id" />
+                </group>
+                <group name="header_2" colspan="1" col="2">
+                    <field name="currency_id" />
+                    <field name="price_unit" />
+                    <field name="quantity" />
+                    <field name="uom_id" />
+                    <field name="tax_ids" widget="many2many_tags" />
+                    <field name="invoice_line_id" />
+                </group>
+            </group>
+        </form>
+    </field>
+</record>
+
+<record id="stock_fulfillment_service_djbc_view_tree" model="ir.ui.view">
+    <field name="name">stock.fulfillment_service.djbc.tree</field>
+    <field name="model">stock.fulfillment_service</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="name" />
+            <field name="partner_id" />
+            <field name="picking_id" />
+            <field name="move_id" />
+            <field name="quant_id" />
+            <field name="item_id" />
+            <field name="currency_id" />
+            <field name="price_unit" />
+            <field name="quantity" />
+            <field name="uom_id" />
+            <field name="tax_ids" widget="many2many_tags" />
+            <field name="invoice_id" />
+            <field name="invoice_line_id" invisible="1" />
+        </tree>
+    </field>
+</record>
+</data>
+</openerp>
