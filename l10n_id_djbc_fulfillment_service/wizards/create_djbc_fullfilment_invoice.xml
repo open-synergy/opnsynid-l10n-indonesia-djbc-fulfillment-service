@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 PT. Simetri Sinergi Indonesia
+     Copyright 2021 OpenSynergy Indonesia
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<openerp>
+<data>
+<record id="l10n_id_create_djbc_fullfilment_invoice_view_form" model="ir.ui.view">
+    <field name="name">l10n_id.create_djbc_fullfilment_invoice.view.form</field>
+    <field name="model">l10n_id.create_djbc_fullfilment_invoice</field>
+    <field name="arch" type="xml">
+        <form>
+            <header>
+                <field name="state" invisible="1" />
+            </header>
+            <group name="group_1" colspan="4" col="2" states="draft">
+                <field name="document_id" invisible="1" />
+                <field name="currency_id" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field
+                            name="allowed_fulfillment_service_ids"
+                            widget="many2many_tags"
+                            invisible="1"
+                        />
+            </group>
+            <group name="group_2" colspan="4" col="2" states="populate">
+                <group name="group_2_1" colspan="4" col="2">
+                    <field name="date_invoice" />
+                    <field
+                                name="allowed_journal_ids"
+                                widget="many2many_tags"
+                                invisible="1"
+                            />
+                    <field
+                                name="journal_id"
+                                domain="[('id','in',allowed_journal_ids[0][2])]"
+                                attrs="{'required':[('state','=','populate')]}"
+                            />
+                </group>
+                <field
+                            name="fulfillment_service_ids"
+                            nolabel="1"
+                            domain="[('id', 'in', allowed_fulfillment_service_ids[0][2])]"
+                            context="{'form_view_ref':'l10n_id_djbc_fulfillment_service.stock_fulfillment_service_djbc_view_form', 'tree_view_ref':'l10n_id_djbc_fulfillment_service.stock_fulfillment_service_djbc_view_tree'}"
+                        />
+            </group>
+            <footer states="draft">
+                <button
+                            name="action_populate_fullfilment_service"
+                            string="Populate Fulfillment Services"
+                            type="object"
+                            class="oe_highlight"
+                        />
+                <button special="cancel" string="Cancel" />
+            </footer>
+            <footer states="populate">
+                <button
+                            name="action_create_fullfilment_invoice"
+                            string="Create Invoices"
+                            type="object"
+                            class="oe_highlight"
+                        />
+                <button
+                            name="action_previous"
+                            string="Back"
+                            type="object"
+                            class="oe_highlight"
+                        />
+                <button special="cancel" string="Cancel" />
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record
+            id="l10n_id_create_djbc_fullfilment_invoice_action"
+            model="ir.actions.act_window"
+        >
+    <field name="name">Create DJBC Fullfilment Invoice</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">l10n_id.create_djbc_fullfilment_invoice</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+</data>
+</openerp>
